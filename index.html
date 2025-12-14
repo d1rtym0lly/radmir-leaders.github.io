@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radmir GTA 5 RP - Команда проекта</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Админ панель с расширенными функциями -->
+        <div class="admin-panel">
+            <button id="loginBtn" class="admin-btn">
+                <i class="fas fa-user-shield"></i> Админ доступ
+            </button>
+            
+            <div id="loginForm" class="login-form hidden">
+                <input type="password" id="adminPassword" placeholder="Введите пароль">
+                <button id="submitLogin" class="admin-btn">
+                    <i class="fas fa-sign-in-alt"></i> Войти
+                </button>
+            </div>
+            
+            <div id="adminControls" class="hidden">
+                <button id="addPersonBtn" class="admin-btn">
+                    <i class="fas fa-user-plus"></i> Добавить участника
+                </button>
+                <button id="editToggle" class="admin-btn">
+                    <i class="fas fa-edit"></i> Режим редактирования
+                </button>
+                <button id="saveBtn" class="admin-btn hidden">
+                    <i class="fas fa-save"></i> Сохранить все
+                </button>
+                <button id="logoutBtn" class="admin-btn">
+                    <i class="fas fa-sign-out-alt"></i> Выйти
+                </button>
+            </div>
+        </div>
+
+        <!-- Заголовок -->
+        <header>
+            <h1>RADMIR GTA 5 RP</h1>
+            <p class="subtitle">Текущие лидеры государственных фракций</p>
+        </header>
+
+        <!-- Информационная панель -->
+        <div class="info-panel">
+            <h3><i class="fas fa-info-circle"></i> О проекте</h3>
+            <p>Radmir GTA 5 RP - это уникальный ролевой проект, где каждый участник играет важную роль в жизни города Лос-Сантос. Наш состав постоянно растет и развивается.</p>
+        </div>
+
+        <!-- Статистика -->
+        <div class="stats">
+            <p>Всего лидеров на данный момент: <span id="totalPeople">0</span></p>
+            <p style="margin-top: 10px; font-size: 14px; color: #666;">Страница: <span id="currentPage">1</span> из <span id="totalPages">1</span></p>
+        </div>
+
+        <!-- Контейнер для людей -->
+        <main class="gallery-container">
+            <div id="peopleContainer" class="people-grid">
+                <!-- Данные загружаются через JavaScript -->
+            </div>
+
+            <!-- Пагинация -->
+            <div class="pagination">
+                <button id="prevBtn">
+                    <i class="fas fa-chevron-left"></i> Назад
+                </button>
+                <span id="pageInfo">Страница 1 из 1</span>
+                <button id="nextBtn">
+                    Вперед <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </main>
+
+        <!-- Модальное окно редактирования -->
+        <div id="editModal" class="modal hidden">
+            <div class="modal-content">
+                <h2><i class="fas fa-user-edit"></i> Редактирование профиля</h2>
+                
+                <div class="form-group">
+                    <label>Имя и фамилия</label>
+                    <input type="text" id="editName" placeholder="Например: ИВАН ПЕТРОВ">
+                </div>
+                
+                <div class="form-group">
+                    <label>Организация / Фракция</label>
+                    <input type="text" id="editOrganization" placeholder="Например: LSPD, Медики, Банда">
+                </div>
+                
+                <div class="form-group">
+                    <label>Должность / Ранг</label>
+                    <input type="text" id="editPosition" placeholder="Например: Капитан, Врач, Лидер">
+                </div>
+                
+                <div class="form-group">
+                    <label>Ссылка на фото</label>
+                    <input type="text" id="editPhoto" placeholder="Вставьте URL изображения">
+                    <small style="color: #888; display: block; margin-top: 5px;">Рекомендуется: вертикальные фото 400x600px</small>
+                </div>
+                
+                <div class="modal-buttons">
+                    <button id="deletePerson" style="margin-right: auto;">
+                        <i class="fas fa-trash"></i> Удалить
+                    </button>
+                    <button id="cancelEdit">Отмена</button>
+                    <button id="saveEdit">Сохранить</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Модальное окно добавления нового человека -->
+        <div id="addPersonModal" class="modal hidden">
+            <div class="modal-content">
+                <h2><i class="fas fa-user-plus"></i> Добавить нового участника</h2>
+                
+                <div class="form-group">
+                    <label>Имя и фамилия *</label>
+                    <input type="text" id="newPersonName" placeholder="Например: АЛЕКСЕЙ СИДОРОВ">
+                </div>
+                
+                <div class="form-group">
+                    <label>Организация / Фракция *</label>
+                    <input type="text" id="newPersonOrganization" placeholder="Например: Такси служба">
+                </div>
+                
+                <div class="form-group">
+                    <label>Должность / Ранг *</label>
+                    <input type="text" id="newPersonPosition" placeholder="Например: Диспетчер">
+                </div>
+                
+                <div class="form-group">
+                    <label>Ссылка на фото *</label>
+                    <input type="text" id="newPersonPhoto" placeholder="Вставьте URL изображения">
+                    <small style="color: #888; display: block; margin-top: 5px;">Для теста: https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80</small>
+                </div>
+                
+                <div class="modal-buttons">
+                    <button id="cancelNewPerson">Отмена</button>
+                    <button id="saveNewPerson">Добавить</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Футер -->
+        <footer>
+            <p>© Radmir GTA 5 RolePlay. Все права защищены.</p>
+            <p style="margin-top: 10px; color: #444;">
+                Проект постоянно развивается. Присоединяйтесь к нашей команде!
+            </p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

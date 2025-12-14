@@ -1,0 +1,305 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: #0a0a0a;
+    color: #f0f0f0;
+    min-height: 100vh;
+    line-height: 1.6;
+    background-image: 
+        linear-gradient(rgba(10, 10, 10, 0.95), rgba(10, 10, 10, 0.95)),
+        url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.container {
+    max-width: 1600px; /* Увеличен максимальный размер */
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Админ панель с функциями добавления */
+.admin-panel {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: rgba(20, 20, 20, 0.95);
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 15px;
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 200px;
+}
+
+.admin-btn {
+    background: #222;
+    color: #fff;
+    border: 1px solid #444;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+    text-align: center;
+}
+
+.admin-btn:hover {
+    background: #333;
+    border-color: #666;
+}
+
+#addPersonBtn {
+    background: #2a2a2a;
+    border-color: #555;
+}
+
+#addPersonBtn:hover {
+    background: #3a3a3a;
+}
+
+.login-form {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.login-form input {
+    padding: 10px;
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.login-form input:focus {
+    outline: none;
+    border-color: #666;
+}
+
+#adminControls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Заголовок в стиле Radmir */
+header {
+    text-align: center;
+    margin: 60px 0 40px 0;
+    padding: 0 20px;
+}
+
+header h1 {
+    font-size: 3rem;
+    font-weight: 300;
+    letter-spacing: 3px;
+    color: #fff;
+    margin-bottom: 10px;
+    position: relative;
+    display: inline-block;
+}
+
+header h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 25%;
+    width: 50%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #ff3333, transparent);
+}
+
+.subtitle {
+    color: #888;
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin-top: 20px;
+}
+
+/* Сетка людей - адаптивная */
+.people-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 40px;
+    margin-bottom: 50px;
+}
+/* ... предыдущий код остается без изменений до секции .person-card ... */
+
+/* ... остальной CSS без изменений ... */
+
+/* Обновите эти стили в style.css */
+
+/* Стили для карточки */
+.person-card {
+    background: rgba(25, 25, 25, 0.8);
+    border: 1px solid rgba(0, 204, 102, 0.15);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    height: 550px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column; /* Важно: делаем колонку */
+}
+
+/* Контейнер для фото - занимает 100% доступного пространства */
+.person-img-container {
+    flex: 1; /* Растягивается на всё доступное пространство */
+    position: relative;
+    overflow: hidden;
+    min-height: 0; /* Важно для flex */
+}
+
+.person-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    transition: all 0.5s ease;
+    display: block;
+}
+
+/* ИМЯ - В САМОМ НИЗУ ФОТО, НАД ИНФОРМАЦИЕЙ */
+.person-name {
+    position: absolute;
+    bottom: 0; /* Прижимаем к самому низу фото */
+    left: 0;
+    right: 0;
+    padding: 25px 20px;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.95) 0%,
+        rgba(0, 0, 0, 0.7) 50%,
+        transparent 100%
+    );
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.8),
+                 0 0 10px rgba(0, 204, 102, 0.5);
+    z-index: 2;
+}
+
+/* ИНФОРМАЦИЯ - ОТДЕЛЬНЫЙ БЛОК ПОД ФОТО */
+.person-info {
+    padding: 20px;
+    background: rgba(15, 15, 15, 0.95);
+    border-top: 2px solid rgba(0, 204, 102, 0.3);
+    flex-shrink: 0; /* Не сжимается */
+    min-height: 100px; /* Минимальная высота */
+}
+
+.person-organization {
+    font-size: 1.3rem;
+    color: #00cc66;
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.person-position {
+    font-size: 1.1rem;
+    color: #ddd;
+    font-style: italic;
+    text-align: center;
+}
+
+/* Кнопка редактирования */
+.edit-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    border: 1px solid rgba(255, 51, 51, 0.3);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 10; /* Важно: должен быть выше других элементов */
+}
+
+.edit-icon:hover {
+    background: rgba(255, 51, 51, 0.3);
+    transform: scale(1.1);
+}
+
+.person-card:hover .edit-icon {
+    opacity: 1;
+}
+
+/* ... остальной CSS без изменений ... */
+
+/* ... остальной код остается без изменений ... */
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .person-card {
+        height: 480px;
+    }
+    
+    .person-img-container {
+        height: 350px;
+    }
+    
+    .person-name {
+        height: 70px;
+        font-size: 1.4rem;
+        padding: 15px;
+    }
+    
+    .person-info {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .person-card {
+        height: 450px;
+    }
+    
+    .person-img-container {
+        height: 300px;
+    }
+    
+    .person-name {
+        height: 60px;
+        font-size: 1.2rem;
+        padding: 12px;
+    }
+    
+    .person-info {
+        padding: 12px;
+    }
+}
